@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <queue>
 #include <cstdlib>
+#include <climits>
 using namespace std;
 
 class Median{
