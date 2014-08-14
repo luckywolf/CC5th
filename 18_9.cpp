@@ -7,8 +7,8 @@ using namespace std;
 
 class Median{
 private:
-    priority_queue<int,vector<int>,less<int> > max_heap; // left part
-    priority_queue<int,vector<int>,greater<int> > min_heap; // right part
+    priority_queue<int,vector<int>,less<int> > max_heap; // left part (lower part)
+    priority_queue<int,vector<int>,greater<int> > min_heap; // right part (higher part)
     
 public:
     void insert(int v);
