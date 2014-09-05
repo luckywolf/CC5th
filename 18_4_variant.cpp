@@ -10,6 +10,8 @@ int countHas5(int n){
        int origN = n;
     if (n <= 4) { // if n is negative, return 0
        return 0;
+    } else if (n < 10) { // fix previous bug
+       return 1;
     }
     // save all the digits of the input integer into a vector in reversed order
     vector<int> digits;
@@ -38,8 +40,8 @@ int countHas5(int n){
                notHas5 -= pow9[i];
         }
     }
-    if (digits[0] == 0) {
-       notHas5 += 1;  // handle integers (>= 2 bits) ending with "0"
+    if (digits[0] < 5) {
+       notHas5 += 1;  // handle integers (>= 2 bits) ending with [0, 4]
     }
    
     return origN + 1 - notHas5; // count range is [0, origN]
@@ -56,6 +58,8 @@ int main(){
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
     n = 8;
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
+    n = 12;
+    cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
     n = 15;
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
     n = 55;
@@ -67,6 +71,8 @@ int main(){
     n = 599;
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
     n = 600;
+    cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
+    n = 604;
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
     n = 620;
     cout << "n = " << n << ", countHas5(n) = " << countHas5(n) << endl;
