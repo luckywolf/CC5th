@@ -1,3 +1,7 @@
+/*
+Describe an algorithm to find the smallest 1 million numbers in 1 billion numbers. 
+Assume that the computer memory can hold all one billion numbers.
+*/
 #include <iostream>
 #include <algorithm>
 #include <queue>

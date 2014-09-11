@@ -1,3 +1,7 @@
+/*
+Write a function that takes an integer n, and determine between 0 and n 
+how many integers contain 5 in it. 
+*/
 #include <iostream>
 #include <cstdlib>
 #include <vector>
