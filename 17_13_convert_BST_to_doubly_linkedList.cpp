@@ -22,13 +22,13 @@ struct BiNode{
     BiNode(int x): val(x), node1(NULL), node2(NULL) {}
 };
 
-
-BiNode *BSTToCircularDList(BiNode *root){
+/* version 1*/
+BiNode *BSTToCircularDList_1(BiNode *root){
     if (!root) {
         return NULL;
     }
-    BiNode *left = BSTToCircularDList(root->node1);
-    BiNode *right = BSTToCircularDList(root->node2);
+    BiNode *left = BSTToCircularDList_1(root->node1);
+    BiNode *right = BSTToCircularDList_1(root->node2);
     BiNode *head = root;
     if (left) {
         head = left;
@@ -46,17 +46,48 @@ BiNode *BSTToCircularDList(BiNode *root){
     return head;
 }
 
-BiNode *BSTToDList(BiNode *root){
+/* version 2 */
+void BSTToDList_2(BiNode *root, BiNode*& start, BiNode*& end){
+    start = end = root; // be cautious, possible bugs
+    if (root->node1) {
+        BiNode *lstart = NULL, *lend = NULL;
+        BSTToDList_2(root->node1, lstart, lend);
+        lend->node2 = root;
+        root->node1 = lend;
+        start = lstart;  // be cautious, possible bugs
+    }
+    if (root->node2) {
+        BiNode *rstart = NULL, *rend = NULL;
+        BSTToDList_2(root->node2, rstart, rend);
+        rstart->node1 = root;
+        root->node2 = rstart;
+        end = rend; // be cautious, possible bugs
+    }
+}
+
+BiNode* BSTToCircularDList_2(BiNode *root){
     if (!root) {
         return NULL;
     }
-    BiNode *head = BSTToCircularDList(root);
+    BiNode *start = NULL, *end = NULL;
+    BSTToDList_2(root, start, end);
+    start->node1 = end;
+    end->node2 = start;
+    return start;
+}
+
+/* for print */
+BiNode *BSTToDListForPrint(BiNode *root){
+    if (!root) {
+        return NULL;
+    }
+    // BiNode *head = BSTToCircularDList_1(root);
+    BiNode *head = BSTToCircularDList_2(root);
     BiNode *tail = head->node1;
     head->node1 = NULL;
     tail->node2 = NULL;
     return head;
 }
-
 
 void print(BiNode *head){
     while(head){
@@ -88,7 +119,7 @@ int main(){
     binode2->node2 = binode3;
     binode1->node1 = binode0;
     
-    BiNode *head = BSTToDList(binode4);
+    BiNode *head = BSTToDListForPrint(binode4);
     print(head);
     return 0;
 }
