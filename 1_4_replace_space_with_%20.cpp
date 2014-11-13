@@ -1,6 +1,6 @@
 /*
 Write a method to replace all spaces in a string with "%20". You may assume that
-the string has sufficent space at the end of the string ot hold the additional
+the string has sufficent space at the end of the string to hold the additional
 characters, and that you are given the "true" length of the string. (Note: if 
 implementation in Java, please use a character array so that you can perform
 this opeartion in place.)
@@ -26,6 +26,7 @@ string replaceSpace(string &s){
     s.append(" ", 2 * counter);
     for (int i = len - 1, j = len - 1 + 2 * counter; i >= 0 && counter > 0; --i) {
         if (s[i] == ' ') {
+            counter--;
             s[j--] = '0';
             s[j--] = '2';
             s[j--] = '%';
