@@ -19,24 +19,20 @@ public:
     float getMedian();
 };
 
-void Median::insert(int v){
+void Median::insert(int v){ // max_heap.size() is always >= min_heap.size()
     if (max_heap.empty() || v < max_heap.top()) { // v is needed to insert to max_heap
         if (max_heap.size() > min_heap.size()) {
             min_heap.push(max_heap.top());
             max_heap.pop();
-            max_heap.push(v);
-        } else {
-            max_heap.push(v);
         }
+        max_heap.push(v);
     } else if (min_heap.empty() || v > min_heap.top()) { // v is needed to insert to min_heap
-        if (min_heap.size() < max_heap.size()) {
-            min_heap.push(v);
-        } else {
+        if (min_heap.size() >= max_heap.size()) {
             max_heap.push(min_heap.top());
             min_heap.pop();
-            min_heap.push(v);
         }
-    } else { // v may be inserted to max_hea or min_heap
+        min_heap.push(v);
+    } else { // v may be inserted to max_heap or min_heap
         if (max_heap.size() > min_heap.size()) {
             min_heap.push(v);
         } else {
