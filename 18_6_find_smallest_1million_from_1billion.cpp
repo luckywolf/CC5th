@@ -13,7 +13,7 @@ bool myCompare (int i,int j) {
     return i > j;
 }
 
-// using min_heap to get k largest element, Time: O(nlogk)
+// using min_heap to get k largest element, Time: O(nlogk), Space: O(k)
 void getKLargest1(vector<int> &a, int k) {
     int n = a.size();
     assert(n > k && k > 0 && n > 0);
@@ -48,7 +48,9 @@ int partition(vector<int> &a, int start, int end, int pivotIndex) {
     return swapIndex;
 }
 
-// time complexity: O(n) on average, O(n^2) in worst case
+// time complexity: O(n) on average, O(n^2) in worst case, sapce: O(1),
+// after quickSelect, the elements before the KthLargest and itself are 
+// the top k largest elements
 int getKthLargestRe(vector<int> &a, int start, int end, int k) {
     assert(k >= 1 && k <= a.size());
     while (true) {
@@ -70,11 +72,14 @@ void getKLargest2(vector<int> &a, int k) {
     int n = a.size();
     assert(n > k && k > 0 && n > 0);
     int kthLargest = getKthLargestRe(a, 0, n-1, k);
-    for (int i = 0, swapIndex = 0; i < n; ++i) {
-        if (a[i] >= kthLargest) {
-            swap(a[swapIndex++], a[i]);
-        }
-    }
+    // the blow part is not needed
+    // after quickSelect, the elements before the KthLargest and itself 
+    // are the top k largest elements
+    // for (int i = 0, swapIndex = 0; i < n; ++i) {
+    //     if (a[i] >= kthLargest) {
+    //         swap(a[swapIndex++], a[i]);
+    //     }
+    // }
 }
 
 
