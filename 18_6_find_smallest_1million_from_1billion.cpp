@@ -13,7 +13,7 @@ bool myCompare (int i,int j) {
     return i > j;
 }
 
-// using min_heap to get k largest element
+// using min_heap to get k largest element, Time: O(nlogk)
 void getKLargest1(vector<int> &a, int k) {
     int n = a.size();
     assert(n > k && k > 0 && n > 0);
@@ -48,6 +48,7 @@ int partition(vector<int> &a, int start, int end, int pivotIndex) {
     return swapIndex;
 }
 
+// time complexity: O(n) on average, O(n^2) in worst case
 int getKthLargestRe(vector<int> &a, int start, int end, int k) {
     assert(k >= 1 && k <= a.size());
     while (true) {
@@ -64,6 +65,7 @@ int getKthLargestRe(vector<int> &a, int start, int end, int k) {
     }
 }
 
+// time complexity: O(n) on average, O(n^2) in worst case
 void getKLargest2(vector<int> &a, int k) {
     int n = a.size();
     assert(n > k && k > 0 && n > 0);
