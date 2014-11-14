@@ -48,6 +48,7 @@ TreeNode* search(TreeNode* head, int x){
     return NULL;
 }
 
+/* solution 1 */
 int getLengthToRoot(TreeNode* node){
     int res = 0;
     while(node) {
@@ -57,6 +58,7 @@ int getLengthToRoot(TreeNode* node){
     return res;
 }
 
+/*Iteratively, use parent pointer */
 TreeNode* lowestCommonAncestor(TreeNode* t1, TreeNode *t2){
     if(!t1 || !t2) {
         return NULL;
@@ -85,6 +87,7 @@ TreeNode* lowestCommonAncestor(TreeNode* t1, TreeNode *t2){
     return t1;
 }
 
+/* solution 2*/
 bool getPathFromRoot(TreeNode *node, TreeNode *head, vector<TreeNode *> &path) {
     if (!head || !node) {
         return false;
@@ -118,7 +121,9 @@ void printPath(vector<TreeNode *> &path) {
     
 }
 
-TreeNode *lowestCommonAncestor2(TreeNode *t1, TreeNode *t2, TreeNode *head) {
+/* Iteratively, without parent pointer,
+similar to find the first common node in two linked list */
+TreeNode *lowestCommonAncestor_2(TreeNode *t1, TreeNode *t2, TreeNode *head) {
     vector<TreeNode *> path1, path2;
     getPathFromRoot(t1, head, path1);
     getPathFromRoot(t2, head, path2);
@@ -139,6 +144,24 @@ TreeNode *lowestCommonAncestor2(TreeNode *t1, TreeNode *t2, TreeNode *head) {
     return res;
 }
 
+/* Solution 3, Recursively, without parent pointer. Concise code */
+TreeNode *lowestCommonAncestor_3(TreeNode *&t1, TreeNode *&t2, TreeNode *&root) {
+    if(root == NULL) {
+        return NULL;
+    }
+    if(root == t1 || root == t2) {
+        return root;
+    } else{
+        TreeNode* left = lowestCommonAncestor_3(t1, t2, root->left);
+        TreeNode* right = lowestCommonAncestor_3(t1, t2, root->right);
+        if(left && right) { //one node is in the left and the other is in the right
+            return root;
+        } else { //both in left or both in right
+            return left ? left : right; //if both in the left,return left
+        }
+    }
+}
+
 /*
                 4
           2           7
@@ -153,12 +176,14 @@ int main(){
     init();
     TreeNode *head = NULL;
     create_minimal_tree(head, NULL, a, 0, 9);
-    TreeNode *n1 = search(head, 6);
+    TreeNode *n1 = search(head, 1);
     TreeNode *n2 = search(head, 9);
     cout << n1->val << " " << n2->val << endl;
     TreeNode *ans = lowestCommonAncestor(n1, n2);
     cout << ans->val << endl;
-    TreeNode *ans2 = lowestCommonAncestor2(n1, n2, head);
+    TreeNode *ans2 = lowestCommonAncestor_2(n1, n2, head);
     cout << ans2->val << endl;
+    TreeNode *ans3 = lowestCommonAncestor_3(n1, n2, head);
+    cout << ans3->val << endl;
     return 0;
 }
