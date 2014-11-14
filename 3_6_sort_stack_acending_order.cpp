@@ -39,8 +39,9 @@ int main(){
     srand((unsigned)time(0));
     stack<int> s;
     
-    for(int i = 0; i < 10; ++i)
+    for(int i = 0; i < 10; ++i) {
         s.push((rand() % 100));
+    }
     s = ssort(s);
 //    qsort(s);
     while(!s.empty()){
