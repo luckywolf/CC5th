@@ -30,7 +30,7 @@ ListNode* init(int a[], int n){
     return head;
 }
 
-ListNode *removeDulicate(ListNode *head){
+ListNode *removeDuplicate(ListNode *head){
     unordered_set<int> lookup;
     ListNode dummy(0);
     dummy.next = head;
@@ -48,7 +48,7 @@ ListNode *removeDulicate(ListNode *head){
     return dummy.next;
 }
 
-ListNode *removeDulicate1(ListNode *head){
+ListNode *removeDuplicate1(ListNode *head){
     ListNode dummy(0);
     dummy.next = head;
     ListNode *pre = &dummy;
@@ -81,8 +81,8 @@ int main(){
         3, 2, 1, 3, 5, 6, 2, 6, 3, 1
     };
     ListNode *head = init(a, n);
-    removeDulicate(head);
-    //removeDulicate1(head);
+    removeDuplicate(head);
+    //removeDuplicate1(head);
     print(head);
     return 0;
 }
