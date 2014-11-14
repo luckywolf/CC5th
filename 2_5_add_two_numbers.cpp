@@ -70,17 +70,11 @@ int addNumberRe(ListNode *&l1, ListNode *&l2, ListNode *&res) {
         return carry;
     }
     carry = addNumberRe(l1->next, l2->next, res);
-    int value = carry;
-    if (l1) {
-        value += l1->val;
-    }
-    if (l2) {
-        value += l2->val;
-    }
-    carry = value / 10;
+    int value = carry + l1->val + l2->val; // l1 and l2 have same length
     ListNode *curRes = res;
     res = new ListNode(value % 10);
     res->next = curRes;
+    carry = value / 10;
     return carry;
 }
 /* without the help of reverse */
@@ -121,7 +115,7 @@ ListNode *reverse(ListNode *head) {
     }
     return res;
 }
-/ * with the help of reverse */
+/* with the help of reverse */
 ListNode *addNumber2(ListNode *l1, ListNode *l2) {
     if (!l1) {
         return l2;
