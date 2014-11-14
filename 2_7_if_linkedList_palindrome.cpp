@@ -42,7 +42,7 @@ int getLength(ListNode *head) {
     return ret;
 }
 
-
+// Top-down Time: O(n), Space: O(n)
 bool isPalindrome(ListNode *head) {
     if (!head) {
         return true;
@@ -54,7 +54,7 @@ bool isPalindrome(ListNode *head) {
         half.push(p->val);
         p = p->next;
     }
-    if (len % 2) {
+    if (len && 0x1) {
         p = p->next;
     }
     while (p) {
@@ -85,7 +85,7 @@ bool isPalindromeRe(ListNode *& front, ListNode *& back, int len) {
         }
     }
 }
-
+/* Bottom-up, Time: O(n), Space: O(1) */
 bool isPalindrome2(ListNode *head) {
     if (!head) {
         return true;
