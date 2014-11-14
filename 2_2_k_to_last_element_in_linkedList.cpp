@@ -26,7 +26,7 @@ ListNode* init(int a[], int n){
 
 /*
  
- 1->2->3->4>NULL
+ 1->2->3->4->NULL
     |     |
    k=2   0th to last
  
