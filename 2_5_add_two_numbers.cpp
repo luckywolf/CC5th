@@ -47,18 +47,15 @@ void print(ListNode *head){
 }
 
 ListNode *reverse(ListNode *head) {
-    ListNode dummy(0);
-    dummy.next = head;
-    ListNode *pre = &dummy;
-    ListNode dummy2(0);
-    ListNode *ret = &dummy2;
-    while(pre->next) {
-        ListNode *mov = pre->next;
-        pre->next = mov->next;
-        mov->next = ret->next;
-        ret->next = mov;
+    ListNode *res = NULL;
+    ListNode *cur = head;
+    while(cur) {
+        ListNode *nextNode = cur->next;
+        cur->next = res;
+        res = cur;
+        cur = nextNode;
     }
-    return dummy2.next;
+    return res;
 }
 
 int getLength(ListNode *head) {
