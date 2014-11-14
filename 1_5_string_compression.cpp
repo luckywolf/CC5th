@@ -8,11 +8,11 @@ should return the original string.
 #include <cstring>
 using namespace std;
 
-// One scan, 2n space
+// One scan, n space
 string compress(string s){
     int len = s.size();
     int i = 0, j = 0, counter = 0;
-    string res(s + s);
+    string res(len, ' ');
     for (; i < len && j < len; ++i) {
         ++counter;
         if (i < len - 1 && s[i] == s[i+1]) {
