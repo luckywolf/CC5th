@@ -9,6 +9,7 @@ there is a route between two nodes.
 #include <cstdio>
 using namespace std;
 
+//  Use adjacent matrix
 bool hasRoute(int src, int dst, bool g[][5], int n){
     queue<int> q;
     unordered_set<int> visited;
@@ -92,7 +93,7 @@ private:
     adjListNode **arr;
 };
 
-
+// Use adjacent list
 bool hasRoute2(int src, int dst, graph& g){
     queue<int> q;
     unordered_set<int> visited;
