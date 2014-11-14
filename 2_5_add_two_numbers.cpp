@@ -46,18 +46,6 @@ void print(ListNode *head){
     cout << endl;
 }
 
-ListNode *reverse(ListNode *head) {
-    ListNode *res = NULL;
-    ListNode *cur = head;
-    while(cur) {
-        ListNode *nextNode = cur->next;
-        cur->next = res;
-        res = cur;
-        cur = nextNode;
-    }
-    return res;
-}
-
 int getLength(ListNode *head) {
     int ret = 0;
     while (head) {
@@ -68,17 +56,34 @@ int getLength(ListNode *head) {
 }
 
 ListNode *prepend(ListNode *head, int n) {
-    ListNode dummy(0);
-    dummy.next = head;
-    ListNode *pre = &dummy;
     for (int i = 0; i < n; ++i) {
-        ListNode *temp = pre->next;
-        pre->next = new ListNode(0);
-        pre->next->next = temp;
+        ListNode *temp = head;
+        head = new ListNode(0);
+        head->next = temp;
     }
-    return dummy.next;
+    return head;
 }
 
+int addNumberRe(ListNode *&l1, ListNode *&l2, ListNode *&res) {
+    int carry = 0;
+    if (l1 == NULL && l2 == NULL) {
+        return carry;
+    }
+    carry = addNumberRe(l1->next, l2->next, res);
+    int value = carry;
+    if (l1) {
+        value += l1->val;
+    }
+    if (l2) {
+        value += l2->val;
+    }
+    carry = value / 10;
+    ListNode *curRes = res;
+    res = new ListNode(value % 10);
+    res->next = curRes;
+    return carry;
+}
+/* without the help of reverse */
 ListNode *addNumber(ListNode *l1, ListNode *l2) {
     if (!l1) {
         return l2;
@@ -93,29 +98,30 @@ ListNode *addNumber(ListNode *l1, ListNode *l2) {
     } else if (len1 > len2) {
         l2 = prepend(l2, len1 - len2);
     }
-    int len = max(len1, len2);
-    l1 = reverse(l1);
-    l2 = reverse(l2);
-    ListNode *ret = l1;
-    int carry = 0;
-    for (int i = 0; i < len; ++i) {
-        l1->val += l2->val + carry;
-        carry = l1->val / 10;
-        l1->val %= 10;
-        l1 = l1->next;
-        l2 = l2->next;
-    }
-    ret = reverse(ret);
+    ListNode *res = NULL;
+    int carry = addNumberRe(l1, l2, res);
     if (carry) {
-        ListNode *newret = new ListNode(carry);
-        newret->next = ret;
-        return newret;
+        ListNode *newres = new ListNode(carry);
+        newres->next = res;
+        return newres;
     } else {
-        return ret;
+        return res;
     }
 }
 
 
+ListNode *reverse(ListNode *head) {
+    ListNode *res = NULL;
+    ListNode *cur = head;
+    while(cur) {
+        ListNode *nextNode = cur->next;
+        cur->next = res;
+        res = cur;
+        cur = nextNode;
+    }
+    return res;
+}
+/ * with the help of reverse */
 ListNode *addNumber2(ListNode *l1, ListNode *l2) {
     if (!l1) {
         return l2;
