@@ -144,7 +144,7 @@ TreeNode *lowestCommonAncestor_2(TreeNode *t1, TreeNode *t2, TreeNode *head) {
     return res;
 }
 
-/* Solution 3, Recursively, without parent pointer. Concise code */
+/* Solution 3, Recursively, without parent pointer. Assumption: both nodes exist in the tree */
 TreeNode *lowestCommonAncestor_3(TreeNode *&t1, TreeNode *&t2, TreeNode *&root) {
     if(root == NULL) {
         return NULL;
